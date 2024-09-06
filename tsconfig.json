@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "target": "ES6",               // Compila a ES6
+    "module": "CommonJS",          // Usa CommonJS para módulos
+    "outDir": "./lib",             // Carpeta para archivos compilados
+    "strict": true,                // Activa comprobaciones estrictas
+    "esModuleInterop": true        // Interoperabilidad con módulos CommonJS
+  }
+    
+}

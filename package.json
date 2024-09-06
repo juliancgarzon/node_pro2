@@ -1,0 +1,24 @@
+{
+  "name": "nodeproject1",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "tsc && node lib/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "sh -c \"$(curl -fsSL https://github.com/juliancgarzon/nodeProject1.git)\""
+  },
+  "author": "julian garzon",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "tslint": "^5.20.1",
+    "typescript": "^5.5.4"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
