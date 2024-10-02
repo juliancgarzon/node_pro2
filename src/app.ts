@@ -1,6 +1,6 @@
 import express, { Router }  from 'express';
 import pool from './database/db_connect';
-import { getCategories } from "./controllers/categories_controller";
+import { getCategories, getCategoriesById } from "./controllers/categories_controller";
 
 require('dotenv').config();
 
@@ -10,6 +10,7 @@ const port = process.env.PORT;
 const categoriesRoutes = Router();
 
 categoriesRoutes.get('/categories',getCategories);
+categoriesRoutes.get('/categories/:id',getCategoriesById);
 
 /*app.get('/',async (req, res) => {
     //const query ='select * from employees;';
