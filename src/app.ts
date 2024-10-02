@@ -1,19 +1,21 @@
 import express, { Router }  from 'express';
 //import pool from './database/db_connect';
-import bodyParser from 'body-parser';
-import { createCategories, getCategories, getCategoriesById } from "./controllers/categories_controller";
+import { createCategories, deleteCategories, getCategories, getCategoriesById, updateCategories } from "./controllers/categories_controller";
 
 require('dotenv').config();
 
 const app = express();
 const port = process.env.PORT;
 
-const categoriesRoutes = Router();
-app.use(express.json());
 
+
+
+const categoriesRoutes = Router();
 categoriesRoutes.get('/categories',getCategories);
 categoriesRoutes.get('/categories/:id',getCategoriesById);
 categoriesRoutes.post('/createcategories',createCategories);
+categoriesRoutes.delete('/deleteCategories/:id',deleteCategories);
+categoriesRoutes.put('/updatecategories/:id',updateCategories);
 
 /*app.get('/',async (req, res) => {
     //const query ='select * from employees;';
@@ -22,6 +24,7 @@ categoriesRoutes.post('/createcategories',createCategories);
     res.send('hola mundo jejejeje ');
 });*/
 
+app.use(express.json());
 app.use(categoriesRoutes);
 
 
