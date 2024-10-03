@@ -4,7 +4,7 @@ import { createCategories, deleteCategories, getCategories, getCategoriesById, u
 import { generateToken } from './controllers/user_controller';
 import { authenticateToken } from './middleware/authorization';
 import { errorHandler } from './middleware/error';
-import { getus_states } from './controllers/states_controller';
+import { createState, deleteStates, getus_states, getus_statesById, updateStates } from './controllers/states_controller';
 
 require('dotenv').config();
 
@@ -15,12 +15,17 @@ const port = process.env.PORT;
 const us_statesRoutes =Router();
 const categoriesRoutes = Router();
 const userRoutes= Router();
+
 categoriesRoutes.get('/categories',authenticateToken,getCategories);
 categoriesRoutes.get('/categories/:id',authenticateToken,getCategoriesById);
 categoriesRoutes.post('/createcategories',authenticateToken,createCategories);
 categoriesRoutes.delete('/deleteCategories/:id',authenticateToken,deleteCategories);
 categoriesRoutes.put('/updatecategories/:id',authenticateToken,updateCategories);
 us_statesRoutes.get('/us_states',authenticateToken,getus_states)
+us_statesRoutes.get('/us_states/:id',authenticateToken,getus_statesById);
+us_statesRoutes.post('/createState',authenticateToken,createState );
+us_statesRoutes.delete('/deleteState/:id',authenticateToken,deleteStates);
+us_statesRoutes.put('/updateStates/:id',authenticateToken,updateStates);
 
 /*app.get('/',async (req, res) => {
     //const query ='select * from employees;';
