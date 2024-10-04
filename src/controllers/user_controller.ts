@@ -10,9 +10,7 @@ export const generateToken = (req: Request, response: Response): Response => {
   //const query = await pool.query('SELECT * FROM users WHERE username = $1 AND password = $2', [userName, password]);
     const user = { name: userName };
   // if (query.rowCount !== null  && query.rowCount > 0){
-    const accessToken = jwt.sign(user, `${process.env.CLAVE_JWT}`, {
-        expiresIn: "1h",
-    });
+    const accessToken = jwt.sign(user, `${process.env.CLAVE_JWT}`, {expiresIn: "1h",});
     return response.status(200).json({ accessToken });
   //  } else {
   // return response.status(400).json('User Not found');
