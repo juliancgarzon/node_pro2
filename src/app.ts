@@ -1,27 +1,15 @@
 import express, { Router }  from 'express';
-//import pool from './database/db_connect';
-
-import { generateToken } from './controllers/user_controller';
-
 import { errorHandler } from './middleware/error';
-
 import { us_statesRoutes } from './routes/states_routes';
 import { categoriesRoutes } from './routes/categories_Routes';
 import cors from "cors";
+import { userRoutes } from './routes/user_routes';
 
 require('dotenv').config();
 
 const app = express();
 const port = process.env.PORT;
-const userRoutes= Router();
 
-/*app.get('/',async (req, res) => {
-    //const query ='select * from employees;';
-    //const response = await pool.query(query);
-    //console.log(response);
-    res.send('hola mundo jejejeje ');
-});*/
-userRoutes.post('/api/login',generateToken);
 
 app.use(cors());
 app.use(express.json());
