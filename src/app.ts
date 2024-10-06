@@ -7,6 +7,7 @@ import { errorHandler } from './middleware/error';
 
 import { us_statesRoutes } from './routes/states_routes';
 import { categoriesRoutes } from './routes/categories_Routes';
+import cors from "cors";
 
 require('dotenv').config();
 
@@ -22,7 +23,7 @@ const userRoutes= Router();
 });*/
 userRoutes.post('/api/login',generateToken);
 
-
+app.use(cors());
 app.use(express.json());
 app.use(errorHandler);
 app.use(categoriesRoutes);
