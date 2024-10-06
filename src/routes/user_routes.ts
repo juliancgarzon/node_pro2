@@ -3,4 +3,4 @@ import { createUser, generateToken } from "../controllers/user_controller";
 
 export const userRoutes= Router();
 userRoutes.post('/api/login',generateToken);
-userRoutes.post('/user/registrer',createUser);
+userRoutes.post('/user/register',createUser);
