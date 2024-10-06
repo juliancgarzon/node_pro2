@@ -98,7 +98,6 @@ export const deleteCategories = async (req: Request, res: Response): Promise<Res
 export const updateCategories = async (req: Request, res: Response): Promise<Response> => {
     const id = parseInt(req.params.id);
     const {categoryName, categoryDescription} = req.body;
-
     try {
         await pool.query('UPDATE categories SET category_name = $1, description = $2 WHERE category_id = $3',
             [categoryName,categoryDescription,id]
