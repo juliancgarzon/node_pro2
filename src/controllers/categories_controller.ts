@@ -48,7 +48,7 @@ export const createCategories = async (req: Request, res: Response): Promise<Res
 
    // console.log(categoryId, categoryName, categoryDescription);
 
-    if (categoryId !== null && categoryName !== null && categoryDescription !== null ){
+    if (categoryId !== null && categoryName !== null && categoryDescription !== null && categoryDescription !== undefined){
         try {
             await pool.query('INSERT INTO categories (category_id, category_name, description) values ($1, $2, $3)',
                 [categoryId, categoryName, categoryDescription]
