@@ -10,7 +10,7 @@ import { Request,Response } from "express";
  */
 export const getCategories = async (req:Request, res:Response): Promise<Response> => {
     try{
-        const response: QueryResult = await pool.query('SELECT * FROM categories;');
+        const response: QueryResult = await pool.query('SELECT * FROM categories ORDER BY category_id;');
         return res.status(200).json(response.rows);
     } catch (error) {
         console.error(console);
