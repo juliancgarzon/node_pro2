@@ -4,7 +4,7 @@ import { createState, deleteStates, getus_states, getus_statesById, updateStates
 
 export const us_statesRoutes =Router();
 
-us_statesRoutes.get('/us_states',authenticateToken,getus_states)
+us_statesRoutes.get('/us_states',getus_states)
 us_statesRoutes.get('/us_states/:id',authenticateToken,getus_statesById);
 us_statesRoutes.post('/createState',authenticateToken,createState );
 us_statesRoutes.delete('/deleteState/:id',authenticateToken,deleteStates);
