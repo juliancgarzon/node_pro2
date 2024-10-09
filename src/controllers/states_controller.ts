@@ -117,4 +117,10 @@ export const updateStates = async (req: Request, res: Response): Promise<Respons
         return res.status(500).json('Internal Server Error');
     }
 
-};
+};  
+/**
+ * Update States by Id
+ * @param req 
+ * @param res 
+ * @returns 
+ */
