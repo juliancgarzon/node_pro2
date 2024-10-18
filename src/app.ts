@@ -4,6 +4,7 @@ import { usuariosRoutes } from './routes/usuarios_Routes';
 import cors from "cors";
 import { userRoutes } from './routes/user_routes';
 
+
 require('dotenv').config();
 
 const app = express();
