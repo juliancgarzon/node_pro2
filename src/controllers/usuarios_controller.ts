@@ -10,7 +10,7 @@ import { Request,Response } from "express";
  */
 export const getusers = async (req:Request, res:Response): Promise<Response> => {
     try{
-        const response: QueryResult = await pool.query('SELECT * FROM usuarios ORDER BY category_id;');
+        const response: QueryResult = await pool.query('SELECT * FROM usuarios ORDER BY id_register;');
         return res.status(200).json(response.rows);
     } catch (error) {
         console.error(console);
@@ -28,7 +28,7 @@ export const getusers = async (req:Request, res:Response): Promise<Response> => 
 export const getusersById = async (req:Request, res:Response): Promise<Response> =>{
     const id = parseInt(req.params.id);
     try {
-        const response: QueryResult= await pool.query('SELECT * FROM categories WHERE category_id = $1', [id]);
+        const response: QueryResult= await pool.query('SELECT * FROM usuarios WHERE id_register = $1', [id]);
         return res.json (response.rows);
     } catch (error) {
         console.error(console);
@@ -44,21 +44,25 @@ export const getusersById = async (req:Request, res:Response): Promise<Response>
 
 export const createusers = async (req: Request, res: Response): Promise<Response> => {
     //console.log(req.body);
-    const {categoryId, categoryName, categoryDescription} = req.body;
+    const { nombre, apellido,ciudad,fecha_de_nacimiento,email,usuario,contraseña} = req.body;
 
    // console.log(categoryId, categoryName, categoryDescription);
 
-    if (categoryId !== null && categoryName !== null && categoryDescription !== null && categoryDescription !== undefined){
+    if (  nombre !== null && apellido !== null && ciudad !== null && fecha_de_nacimiento !== null && email !== null && usuario !== null && contraseña !== null){
         try {
-            await pool.query('INSERT INTO categories (category_id, category_name, description) values ($1, $2, $3)',
-                [categoryId, categoryName, categoryDescription]
+            await pool.query('INSERT INTO usuarios (nombre, apellido,ciudad,fecha_de_nacimiento,email,usuario,contraseña) values ($1, $2, $3)',
+                [nombre, apellido,ciudad,fecha_de_nacimiento,email,usuario,contraseña]
             );
             return res.status(201).json({
                 message: 'Category created successfully',
                 category: {
-                    categoryId,
-                    categoryName,
-                    categoryDescription,
+                    nombre,
+                    apellido,
+                    ciudad,
+                    fecha_de_nacimiento,
+                    email,
+                    usuario,
+                    contraseña
                 }
             });
         } catch (error) {
