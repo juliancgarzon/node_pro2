@@ -3,14 +3,14 @@ import pool from "../database/db_connect";
 import { Request,Response } from "express";
 
 /**
- * Get All Data of Categories Table.
+ * Get All Data of usuarios Table.
  * @param req 
  * @param res 
- * @returns Categories
+ * @returns usuarios
  */
-export const getCategories = async (req:Request, res:Response): Promise<Response> => {
+export const getusers = async (req:Request, res:Response): Promise<Response> => {
     try{
-        const response: QueryResult = await pool.query('SELECT * FROM categories ORDER BY category_id;');
+        const response: QueryResult = await pool.query('SELECT * FROM usuarios ORDER BY category_id;');
         return res.status(200).json(response.rows);
     } catch (error) {
         console.error(console);
@@ -20,12 +20,12 @@ export const getCategories = async (req:Request, res:Response): Promise<Response
 };
 
 /**
- * Get all data of categories table by id
+ * Get all data of usuarios table by id
  * @param req 
  * @param res 
- * @returns Categories by id
+ * @returns usuarios by id
  */
-export const getCategoriesById = async (req:Request, res:Response): Promise<Response> =>{
+export const getusersById = async (req:Request, res:Response): Promise<Response> =>{
     const id = parseInt(req.params.id);
     try {
         const response: QueryResult= await pool.query('SELECT * FROM categories WHERE category_id = $1', [id]);
@@ -36,13 +36,13 @@ export const getCategoriesById = async (req:Request, res:Response): Promise<Resp
     }
 }
 /**
- * Create a new categorie.
+ * Create a new usuarios.
  * @param req 
  * @param res 
  * @returns 
  */
 
-export const createCategories = async (req: Request, res: Response): Promise<Response> => {
+export const createusers = async (req: Request, res: Response): Promise<Response> => {
     //console.log(req.body);
     const {categoryId, categoryName, categoryDescription} = req.body;
 
@@ -71,13 +71,13 @@ export const createCategories = async (req: Request, res: Response): Promise<Res
 };
 
 /**
- * Delete Categories by id
+ * Delete usuarios by id
  * @param req 
  * @param res 
  * @returns 
  */
 
-export const deleteCategories = async (req: Request, res: Response): Promise<Response> => {
+export const deleteusers = async (req: Request, res: Response): Promise<Response> => {
     const id = parseInt(req.params.id);
     try {
         await pool.query('DELETE FROM categories WHERE category_id = $1', [id]);
@@ -89,13 +89,13 @@ export const deleteCategories = async (req: Request, res: Response): Promise<Res
 };
 
 /**
- * Update Categories by Id
+ * Update usuarios by Id
  * @param req 
  * @param res 
  * @returns 
  */
 
-export const updateCategories = async (req: Request, res: Response): Promise<Response> => {
+export const updateusers = async (req: Request, res: Response): Promise<Response> => {
     const id = parseInt(req.params.id);
     const {categoryName, categoryDescription} = req.body;
     try {
