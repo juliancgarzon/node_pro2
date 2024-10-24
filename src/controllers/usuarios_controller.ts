@@ -113,8 +113,8 @@ export const createusers = async (req: Request, res: Response): Promise<Response
 export const deleteusers = async (req: Request, res: Response): Promise<Response> => {
     const id = parseInt(req.params.id);
     try {
-        await pool.query('DELETE FROM categories WHERE category_id = $1', [id]);
-        return res.status(200).json(`The categorie ${id} delete successfully.`);
+        await pool.query('DELETE FROM usuarios WHERE id_register = $1', [id]);
+        return res.status(200).json(`The user ${id} delete successfully.`);
     } catch (error) {
         console.error(error);
         return res.status(500).json('Internal Server Error');
@@ -130,23 +130,36 @@ export const deleteusers = async (req: Request, res: Response): Promise<Response
 
 export const updateusers = async (req: Request, res: Response): Promise<Response> => {
     const id = parseInt(req.params.id);
-    const {categoryName, categoryDescription} = req.body;
-    try {
-        await pool.query('UPDATE categories SET category_name = $1, description = $2 WHERE category_id = $3',
-            [categoryName,categoryDescription,id]
-        );
+    const { nombre, apellido, ciudad, fecha_de_nacimiento, email, usuario, contraseña } = req.body;
 
-        return res.json({
-            message: 'Category Successfully Updated.',
-            category: {
-                id,
-                categoryName,
-                categoryDescription,
-            },
-        });
-    } catch (error) {
-        console.error(error);
-        return res.status(500).json('Internal Server Error');
+    // Verificar si todos los campos requeridos están presentes
+    if (nombre && apellido && ciudad && fecha_de_nacimiento && email && usuario && contraseña) {
+        try {
+            const formattedDate = moment(fecha_de_nacimiento, 'DD/MM/YYYY').format('YYYY-MM-DD');
+            
+            // Ejecutar la consulta de actualización
+            await pool.query(
+                'UPDATE usuarios SET nombre = $1, apellido = $2, ciudad = $3, fecha_de_nacimiento = $4, email = $5, usuario = $6, contraseña = $7 WHERE id_register = $8',
+                [nombre, apellido, ciudad, formattedDate, email, usuario, contraseña, id]
+            );
+
+            return res.status(200).json({
+                message: 'User successfully updated',
+                user: {
+                    id,
+                    nombre,
+                    apellido,
+                    ciudad,
+                    fecha_de_nacimiento: formattedDate,
+                    email,
+                    usuario
+                }
+            });
+        } catch (error) {
+            console.error(error);
+            return res.status(500).json('Internal Server Error');
+        }
+    } else {
+        return res.status(400).json('Bad Request: Missing required fields');
     }
-
 };
