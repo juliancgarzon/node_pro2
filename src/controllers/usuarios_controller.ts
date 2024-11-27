@@ -49,17 +49,8 @@ export const createusers = async (req: Request, res: Response): Promise<Response
     if (nombre && apellido && ciudad && fecha_de_nacimiento && email && usuario && contraseña) {
         const client = await pool.connect(); // Usamos un cliente para manejar la transacción
         try {
-            // Usar moment.js para reformatear la fecha
+            
             const formattedDate = moment(fecha_de_nacimiento, 'DD/MM/YYYY').format('YYYY-MM-DD');
-            /*console.log("Datos después de formatear la fecha:", {
-                nombre,
-                apellido,
-                ciudad,
-                fecha_de_nacimiento: formattedDate,
-                email,
-                usuario,
-                contraseña
-            });*/
 
             // Iniciar la transacción
             await client.query('BEGIN');

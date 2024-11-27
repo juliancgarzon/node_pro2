@@ -3,6 +3,7 @@ import { errorHandler } from './middleware/error';
 import { usuariosRoutes } from './routes/usuarios_Routes';
 import cors from "cors";
 import { userRoutes } from './routes/user_routes';
+import { reportRoutes } from './routes/report_routes';
 
 
 require('dotenv').config();
@@ -16,6 +17,7 @@ app.use(express.json());
 app.use(errorHandler);
 app.use(usuariosRoutes);
 app.use(userRoutes); 
+app.use(reportRoutes);
 
 
 app.listen(port, () =>{
